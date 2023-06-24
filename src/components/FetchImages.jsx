@@ -4,7 +4,7 @@ export const GetImagesData = () => {
   const [query, Setquery] = useState('');
   const [results, Setresults] = useState([]);
   const [error, Seterror] = useState('');
-  console.log(error);
+
   async function fetchApiCall4() {
     const url = `https://api.unsplash.com/search/photos?page=1&query=${query}&per_page=20&order_by=relevant&client_id=${
       import.meta.env.VITE_ACCESS_KEY
