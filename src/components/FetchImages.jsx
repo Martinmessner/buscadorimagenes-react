@@ -4,16 +4,24 @@ export const GetImagesData = () => {
   const [query, Setquery] = useState('');
   const [results, Setresults] = useState([]);
   const [error, Seterror] = useState('');
+  const [loading, Setloading] = useState(false);
 
   async function fetchApiCall4() {
-    const url = `https://api.unsplash.com/search/photos?page=1&query=${query}&per_page=20&order_by=relevant&client_id=${
+    Setloading(true);
+    const url = `https://api.unsplash.com/search/photos?page=1&query=${query}&per_page=30&order_by=relevant&client_id=${
       import.meta.env.VITE_ACCESS_KEY
     }`;
 
     try {
       const response = await fetch(url);
       const result = await response.json();
+      if (result.results.length === 0) {
+        Seterror('No existe lo que has buscado, intente nuevamente.');
+        Setloading(false);
+        return;
+      }
       Setresults(result.results);
+      Setloading(false);
       console.log(result.results);
     } catch (error) {
       console.error(error);
@@ -30,27 +38,35 @@ export const GetImagesData = () => {
     fetchApiCall4();
   };
 
+  console.log(query);
+
   return (
-    <section>
-      <h1>Encuentre la imagen que necesite.</h1>
-      <>
-        <form onSubmit={sendForm}>
-          <label>Busque:</label>
-          <input
-            type="search"
-            placeholder="Busque aqui..."
-            onChange={(e) => Setquery(e.target.value)}
-          ></input>
-          <div>{error && <p>{error}</p>}</div>
-          <button>Buscar</button>
-        </form>
-      </>
+    <section className="section-search">
+      <h1>ImagenHD+: Encuentre imagenes de alta resolucion.</h1>
+      <form className="form-search" onSubmit={sendForm}>
+        <input
+          placeholder="Busque Aqui..."
+          title="Busque Aqui."
+          type="search"
+          onChange={(e) => Setquery(e.target.value)}
+        />
+        <button disabled={loading}>{loading ? 'Cargando...' : 'Buscar'}</button>
+        {error && <p className="error">{error}</p>}
+      </form>
+
       <main>
-        {results.length > 0
-          ? results.map((image) => (
-              <img src={image.urls.small} alt="foto" key={image.id} />
-            ))
-          : false}
+        {results.length > 0 && (
+          <div className="grid-container">
+            {results.map((image) => (
+              <img
+                className="results-image"
+                src={image.urls.full}
+                alt="foto"
+                key={image.id}
+              />
+            ))}
+          </div>
+        )}
       </main>
     </section>
   );
