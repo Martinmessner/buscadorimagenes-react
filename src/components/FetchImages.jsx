@@ -5,6 +5,7 @@ export const GetImagesData = () => {
   const [results, Setresults] = useState([]);
   const [error, Seterror] = useState('');
   const [loading, Setloading] = useState(false);
+  const [qualityImage, SetqualityImage] = useState(false);
 
   async function fetchApiCall4() {
     Setloading(true);
@@ -40,9 +41,13 @@ export const GetImagesData = () => {
 
   console.log(query);
 
+  const changeQuality = () => {
+    SetqualityImage(!qualityImage);
+    console.log(qualityImage);
+  };
+
   return (
-    <section className="section-search">
-      <h1>ImagenHD+: Encuentre imagenes de alta resolucion.</h1>
+    <section>
       <form className="form-search" onSubmit={sendForm}>
         <input
           placeholder="Busque Aqui..."
@@ -54,13 +59,23 @@ export const GetImagesData = () => {
         {error && <p className="error">{error}</p>}
       </form>
 
+      <div>
+        <button onClick={() => changeQuality()}>
+          {qualityImage === true
+            ? 'Cambiar a  Calidad Regular'
+            : 'Cambiar a  Calidad Alta'}
+        </button>
+      </div>
+
       <main>
         {results.length > 0 && (
           <div className="grid-container">
             {results.map((image) => (
               <img
                 className="results-image"
-                src={image.urls.full}
+                src={
+                  qualityImage === true ? image.urls.full : image.urls.regular
+                }
                 alt="foto"
                 key={image.id}
               />

@@ -50,8 +50,10 @@ button:focus-visible {
   font-size: 1.2em;
 }
 
-.section-search {
-  text-align: center;
+.header-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .form-search {
