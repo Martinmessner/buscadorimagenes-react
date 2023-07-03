@@ -37,9 +37,8 @@ export const GetImagesData = () => {
     }
     Seterror('');
     fetchApiCall4();
+    Setquery('');
   };
-
-  console.log(query);
 
   const changeQuality = () => {
     SetqualityImage(!qualityImage);
@@ -54,20 +53,19 @@ export const GetImagesData = () => {
           title="Busque Aqui."
           type="search"
           onChange={(e) => Setquery(e.target.value)}
+          value={query}
         />
-        <button disabled={loading}>{loading ? 'Cargando...' : 'Buscar'}</button>
-        {error && <p className="error">{error}</p>}
-      </form>
+        <button disabled={loading}>Buscar</button>
 
-      <div>
-        <button onClick={() => changeQuality()}>
+        <button type="button" disabled={loading} onClick={changeQuality}>
           {qualityImage === true
             ? 'Cambiar a  Calidad Regular'
             : 'Cambiar a  Calidad Alta'}
         </button>
-      </div>
+      </form>
 
       <main>
+        {error && <p className="error">{error}</p>}
         {results.length > 0 && (
           <div className="grid-container">
             {results.map((image) => (

@@ -23,7 +23,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #ffefef;
+  background-color: #6fa4ff;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -48,6 +48,8 @@ button:focus-visible {
 .error {
   color: rgb(255, 253, 253);
   font-size: 1.2em;
+  display: flex;
+  justify-content: center;
 }
 
 .header-title {
