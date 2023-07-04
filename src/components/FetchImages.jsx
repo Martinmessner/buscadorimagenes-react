@@ -55,6 +55,7 @@ export const GetImagesData = () => {
         loading={loading}
         Setquery={Setquery}
         query={query}
+        qualityImage={qualityImage}
       />
 
       <GridRenderImages
