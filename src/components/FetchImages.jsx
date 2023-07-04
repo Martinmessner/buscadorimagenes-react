@@ -25,7 +25,6 @@ export const GetImagesData = () => {
       }
       Setresults(result.results);
       Setloading(false);
-      console.log(result.results);
     } catch (error) {
       console.error(error);
     }
@@ -44,7 +43,6 @@ export const GetImagesData = () => {
 
   const changeQuality = () => {
     SetqualityImage(!qualityImage);
-    console.log(qualityImage);
   };
 
   return (
