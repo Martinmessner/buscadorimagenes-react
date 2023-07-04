@@ -49,6 +49,7 @@ export const GetImagesData = () => {
     <section>
       <form className="form-search" onSubmit={sendForm}>
         <input
+          className="input-search"
           placeholder="Busque Aqui..."
           title="Busque Aqui."
           type="search"

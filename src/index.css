@@ -1,7 +1,7 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #d7b6f1; /* Violeta: #d7b6f1 : Blanco: eedada */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,6 +14,11 @@ body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+.input-search {
+  border-radius: 8px;
+  border: 1px solid transparent;
 }
 
 button {
