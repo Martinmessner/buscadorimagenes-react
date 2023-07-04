@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import GridRenderImages from './GridRender';
+import FormInputData from './FormInputs';
 
 export const GetImagesData = () => {
   const [query, Setquery] = useState('');
@@ -47,41 +49,19 @@ export const GetImagesData = () => {
 
   return (
     <section>
-      <form className="form-search" onSubmit={sendForm}>
-        <input
-          className="input-search"
-          placeholder="Busque Aqui..."
-          title="Busque Aqui."
-          type="search"
-          onChange={(e) => Setquery(e.target.value)}
-          value={query}
-        />
-        <button disabled={loading}>Buscar</button>
+      <FormInputData
+        changeQuality={changeQuality}
+        sendForm={sendForm}
+        loading={loading}
+        Setquery={Setquery}
+        query={query}
+      />
 
-        <button type="button" disabled={loading} onClick={changeQuality}>
-          {qualityImage === true
-            ? 'Cambiar a  Calidad Regular'
-            : 'Cambiar a  Calidad Alta'}
-        </button>
-      </form>
-
-      <main>
-        {error && <p className="error">{error}</p>}
-        {results.length > 0 && (
-          <div className="grid-container">
-            {results.map((image) => (
-              <img
-                className="results-image"
-                src={
-                  qualityImage === true ? image.urls.full : image.urls.regular
-                }
-                alt="foto"
-                key={image.id}
-              />
-            ))}
-          </div>
-        )}
-      </main>
+      <GridRenderImages
+        results={results}
+        qualityImage={qualityImage}
+        error={error}
+      />
     </section>
   );
 };
